@@ -1,0 +1,14 @@
+#game-container {
+    width: 800px;
+    background: #1a1a1a;
+    border: 2px solid #333;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+}
+
+#viewport {
+    position: relative;
+    width: 800px;
+    height: 450px;
+    background: #000;
+    overflow: hidden;
+}
