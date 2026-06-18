@@ -1,9 +1,8 @@
 const GAME_FILE = "game.json";
-const INITIAL_LOCATION = "office";
 
 var state = {
     world: null,
-    current_location: INITIAL_LOCATION
+    current_location: null
 };
 
 async function fetchGameData(file) {
@@ -21,8 +20,8 @@ function updateLocationDescription(text) {
     container.innerText = text;
 }
 
-function render(location_name) {
-    let location = state.world[location_name];
+function render() {
+    let location = state.world.rooms[state.current_location];
     if (!location) {
         return;
     }
@@ -33,7 +32,8 @@ function render(location_name) {
 
 async function init() {
     state.world = await fetchGameData(GAME_FILE);
-    render(state.current_location);
+    state.current_location = state.world.initial_location;
+    render();
 }
 
 init();
