@@ -1,7 +1,7 @@
 {
     "rooms": {
         "office": {
-            "background_image": "assets/detective-office.jpg",
+            "background_image": "assets/detective-office.png",
             "description": "You are in your office. The rain is pouring down at the street outside. A heavy desk sits in the center of the room with documents and notes in messy piles."
         }
     },
