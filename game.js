@@ -52,11 +52,18 @@ function changeLocation(newLocation) {
     render();
 }
 
+function newGame() {
+    state.currentLocation = world.initialLocation;
+    saveState();
+    render();
+}
+
 async function init() {
     world = await fetchGameData(GAME_FILE);
     loadState();
     if (!state.currentLocation) {
-        state.currentLocation = world.initialLocation;
+        newGame();
+        return;
     }
     render();
 }
