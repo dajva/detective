@@ -1,9 +1,13 @@
 {
     "rooms": {
         "office": {
-            "background_image": "assets/detective-office.png",
+            "backgroundImage": "assets/detective-office.png",
             "description": "You are in your office. The rain is pouring down at the street outside. A heavy desk sits in the center of the room with documents and notes in messy piles."
+        },
+        "street": {
+            "backgroundImage": "assets/detective-office-street.jpg",
+            "description": "The entrance to the detective's office."
         }
     },
-    "initial_location": "office"
+    "initialLocation": "office"
 }

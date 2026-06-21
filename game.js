@@ -1,8 +1,9 @@
 const GAME_FILE = "game.json";
 
+var world = null;
+
 var state = {
-    world: null,
-    current_location: null
+    currentLocation: null
 };
 
 async function fetchGameData(file) {
@@ -11,8 +12,8 @@ async function fetchGameData(file) {
 }
 
 function updateLocationBackground(image) {
-    let img_tag = document.getElementById("background");
-    img_tag.src = image;
+    let imgTag = document.getElementById("background");
+    imgTag.src = image;
 }
 
 function updateLocationDescription(text) {
@@ -21,18 +22,29 @@ function updateLocationDescription(text) {
 }
 
 function render() {
-    let location = state.world.rooms[state.current_location];
+    let location = world.rooms[state.currentLocation];
     if (!location) {
+        throw new Error("Unknown location: " + newLocation) ;
         return;
     }
 
-    updateLocationBackground(location.background_image);
+    updateLocationBackground(location.backgroundImage);
     updateLocationDescription(location.description);
 }
 
+function changeLocation(newLocation) {
+    if (!(newLocation in world.rooms)) {
+        throw new Error("Unknown location: " + newLocation) ;
+    }
+    state.currentLocation = newLocation;
+    render();
+}
+
 async function init() {
-    state.world = await fetchGameData(GAME_FILE);
-    state.current_location = state.world.initial_location;
+    world = await fetchGameData(GAME_FILE);
+    if (!state.currentLocation) {
+        state.currentLocation = world.initialLocation;
+    }
     render();
 }
 
