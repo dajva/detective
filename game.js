@@ -11,6 +11,17 @@ async function fetchGameData(file) {
     return data.json();
 }
 
+function saveState() {
+    localStorage.setItem("detective_state", JSON.stringify(state));
+}
+
+function loadState() {
+    let savedState = localStorage.getItem("detective_state");
+    if (savedState) {
+        state = JSON.parse(savedState);
+    }
+}
+
 function updateLocationBackground(image) {
     let imgTag = document.getElementById("background");
     imgTag.src = image;
@@ -37,11 +48,13 @@ function changeLocation(newLocation) {
         throw new Error("Unknown location: " + newLocation) ;
     }
     state.currentLocation = newLocation;
+    saveState();
     render();
 }
 
 async function init() {
     world = await fetchGameData(GAME_FILE);
+    loadState();
     if (!state.currentLocation) {
         state.currentLocation = world.initialLocation;
     }
